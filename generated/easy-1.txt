@@ -1,0 +1,47 @@
+Two Sum: Given an array of integers nums and an integer target, 
+return indices of the two numbers such that they add up to target.
+
+Reverse Integer: Given a 32-bit signed integer, reverse digits of an integer.
+
+Palindrome Number: Check if a number is a palindrome. A palindrome number 
+is the same forward and backward.
+
+Roman to Integer: Convert a Roman numeral to an integer.
+
+Longest Common Prefix: Write a function to find the longest common prefix 
+string amongst an array of strings. If there is no common prefix, return an 
+empty string.
+
+Valid Parentheses: Given a string containing just the characters '(', ')', '{', '}',
+'[' and ']', determine if the input string is valid. An input string is valid if 
+open brackets are closed by the same type of brackets, and open brackets are 
+closed in the correct order.
+
+Merge Sorted Array: Given two sorted integer arrays nums1 and nums2, merge nums2 
+into nums1 as one sorted array.
+
+Remove Duplicates from Sorted Array: Given a sorted array nums, remove the 
+duplicates in-place such that each element appears only once and return the new 
+length.
+
+Remove Element: Given an array nums and a value val, remove all instances of that 
+value in-place and return the new length.
+
+Implement strStr(): Return the index of the first occurrence of needle in haystack,
+or -1 if needle is not part of haystack.
+
+Search Insert Position: Given a sorted array of distinct integers and a target 
+value, return the index if the target is found. If not, return the index where 
+it would be if it were inserted in order.
+
+Maximum Subarray: Find the contiguous subarray (containing at least one number) 
+which has the largest sum and return its sum.
+
+Length of Last Word: Given a string s consisting of some words separated by some 
+number of spaces, return the length of the last word in the string.
+
+Plus One: Given a non-empty array of decimal digits representing a non-negative 
+integer, increment one to the integer. The digits are stored such that the most 
+significant digit is at the head of the list.
+
+Add Binary: Given two binary strings a and b, return their sum as a binary string.
