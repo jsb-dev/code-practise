@@ -1,0 +1,26 @@
+/* Given an object or an array, return if it is empty.
+
+An empty object contains no key-value pairs.
+An empty array contains no elements.
+You may assume the object or array is the output of JSON.parse.
+*/
+
+/**
+ * @param {Object|Array} obj
+ * @return {boolean}
+ */
+var isEmpty = function (obj) {
+  if (Array.isArray(obj)) {
+    return obj.length === 0;
+  } else if (obj && typeof obj === 'object') {
+    for (let key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  return true;
+};
