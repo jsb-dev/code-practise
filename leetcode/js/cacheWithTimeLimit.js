@@ -17,33 +17,51 @@ var TimeLimitedCache = function () {
   this.expiration = {};
 };
 
+/**
+ * @param {number} key
+ * @param {number} value
+ * @param {number} duration time until expiration in ms
+ * @return {boolean} if un-expired key already existed
+ */
 TimeLimitedCache.prototype.set = function (key, value, duration) {
-  const now = Date.now();
-  const isNewOrExpired = !this.cache[key] || this.expiration[key] <= now;
-  this.cache[key] = value;
-  this.expiration[key] = now + duration;
-  return !isNewOrExpired;
+  let now = Date.now();
+  let exists = this.cache[key] ? true : false;
+  if (!exists || (exists && this.expiration[key] > now)) {
+    this.cache[key] = value;
+    this.expiration[key] = now + duration;
+    return exists ? true : false;
+  }
+
+  return false;
 };
 
+/**
+ * @param {number} key
+ * @return {number} value associated with key
+ */
 TimeLimitedCache.prototype.get = function (key) {
-  const now = Date.now();
-  if (this.cache[key] && this.expiration[key] > now) {
-    return this.cache[key];
-  }
+  let now = Date.now();
+
+  if (this.cache[key] && this.expiration[key] > now) return this.cache[key];
+
   delete this.cache[key];
   delete this.expiration[key];
+
   return -1;
 };
 
+/**
+ * @return {number} count of non-expired keys
+ */
 TimeLimitedCache.prototype.count = function () {
-  const now = Date.now();
-  let count = 0;
-  for (let key in this.expiration) {
-    if (this.expiration[key] > now) {
-      count++;
-    }
+  let counter = 0;
+  let now = Date.now();
+
+  for (let key in this.cache) {
+    if (this.cache[key] && this.expiration[key] > now) counter++;
   }
-  return count;
+
+  return counter;
 };
 
 /**
