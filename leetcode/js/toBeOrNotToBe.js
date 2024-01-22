@@ -13,19 +13,15 @@ If they are equal, it should throw an error "Equal".
  * @return {Object}
  */
 var expect = function (val) {
+  let expected = val;
   return {
-    // a function which accepts arg n and returns true if n === val
-    // catch !== and throw "Not Equal"
-    toBe: function (n) {
-      if (n === val) return true;
-      throw new Error('Not Equal');
+    toBe: function (val) {
+      if (val === expected) return true;
+      else throw new Error('Not Equal');
     },
-
-    // a function which accepts arg n and returns true if n !== val
-    // catch === and throw "Equal"
-    notToBe: function (n) {
-      if (n !== val) return true;
-      throw new Error('Equal');
+    notToBe: function (val) {
+      if (val !== expected) return true;
+      else throw new Error('Equal');
     },
   };
 };

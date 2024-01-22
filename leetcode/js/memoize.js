@@ -15,14 +15,14 @@ factorial accepts a single integer n and returns 1 if n <= 1 or factorial(n - 1)
  * @return {Function}
  */
 function memoize(fn) {
-  let cache = new Map();
+  let map = new Map();
 
   return function (...args) {
     const key = JSON.stringify(args);
-    if (cache.has(key)) return cache.get(key);
+    if (map.has(key)) return map.get(key);
 
     const result = fn(...args);
-    cache.set(key, result);
+    map.set(key, result);
     return result;
   };
 }

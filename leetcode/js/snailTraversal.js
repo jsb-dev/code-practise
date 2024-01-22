@@ -17,13 +17,10 @@ numbers in the original array.
  * @return {Array<Array<number>>}
  */
 Array.prototype.snail = function (rowsCount, colsCount) {
-  if (
-    rowsCount * colsCount !== this.length ||
-    rowsCount === 0 ||
-    colsCount === 0
-  ) {
-    return [];
-  }
+  const invalid =
+    rowsCount * colsCount !== this.length || rowsCount === 0 || colsCount === 0;
+
+  if (invalid) return [];
 
   let result = new Array(rowsCount)
     .fill()
@@ -31,8 +28,9 @@ Array.prototype.snail = function (rowsCount, colsCount) {
   let index = 0;
 
   for (let col = 0; col < colsCount; col++) {
+    let evenCol = col % 2 === 0 ? true : false;
     for (let row = 0; row < rowsCount; row++) {
-      const targetRow = col % 2 === 0 ? row : rowsCount - 1 - row;
+      const targetRow = evenCol ? row : rowsCount - 1 - row;
       result[targetRow][col] = this[index++];
     }
   }

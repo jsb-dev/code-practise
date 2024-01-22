@@ -14,9 +14,11 @@ specifically at cancelT ms. In that case, fn should never be called.
  */
 var cancellable = function (fn, args, t) {
   let timeoutId = setTimeout(fn, t, ...args);
-  let cancelFn = function () {
+
+  const cancelFn = function () {
     clearTimeout(timeoutId);
   };
+
   return cancelFn;
 };
 

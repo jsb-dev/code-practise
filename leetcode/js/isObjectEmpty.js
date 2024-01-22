@@ -10,9 +10,8 @@ You may assume the object or array is the output of JSON.parse.
  * @return {boolean}
  */
 var isEmpty = function (obj) {
-  if (Array.isArray(obj)) {
-    return obj.length === 0;
-  } else if (obj && typeof obj === 'object') {
+  if (Array.isArray(obj)) return obj.length === 0;
+  else if (typeof obj === 'object') {
     for (let key in obj) {
       if (obj.hasOwnProperty(key)) {
         return false;
@@ -21,6 +20,4 @@ var isEmpty = function (obj) {
 
     return true;
   }
-
-  return true;
 };

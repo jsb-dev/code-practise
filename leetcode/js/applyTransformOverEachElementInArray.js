@@ -9,11 +9,10 @@
  * @return {number[]}
  */
 var map = function (arr, fn) {
-  // create an object with kp: index, value: fn(arr[i], i)
-  // return Object.values(obj)
-  var obj = {};
-  for (var i = 0; i < arr.length; i++) {
-    obj[i] = fn(arr[i], i);
-  }
-  return Object.values(obj);
+  let result = [];
+  arr.forEach((el, i) => {
+    result.push(fn(el, i));
+  });
+
+  return result;
 };

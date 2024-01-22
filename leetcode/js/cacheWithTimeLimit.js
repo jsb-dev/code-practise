@@ -26,10 +26,11 @@ var TimeLimitedCache = function () {
 TimeLimitedCache.prototype.set = function (key, value, duration) {
   let now = Date.now();
   let exists = this.cache[key] ? true : false;
-  if (!exists || (exists && this.expiration[key] > now)) {
+  let expired = this.expiration[key] < now ? true : false;
+  if (!exists || (exists && !expired)) {
     this.cache[key] = value;
     this.expiration[key] = now + duration;
-    return exists ? true : false;
+    return exists;
   }
 
   return false;
@@ -41,8 +42,10 @@ TimeLimitedCache.prototype.set = function (key, value, duration) {
  */
 TimeLimitedCache.prototype.get = function (key) {
   let now = Date.now();
+  let exists = this.cache[key];
+  let expired = this.expiration[key] < now;
 
-  if (this.cache[key] && this.expiration[key] > now) return this.cache[key];
+  if (exists && !expired) return this.cache[key];
 
   delete this.cache[key];
   delete this.expiration[key];
