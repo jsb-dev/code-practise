@@ -26,11 +26,16 @@ var TimeLimitedCache = function () {
 TimeLimitedCache.prototype.set = function (key, value, duration) {
   let now = Date.now();
   let exists = this.cache[key] ? true : false;
-  let expired = this.expiration[key] < now ? true : false;
-  if (!exists || (exists && !expired)) {
+  let expired =
+    this.expiration[key] && this.expiration[key] < now ? true : false;
+
+  if (!exists) {
     this.cache[key] = value;
     this.expiration[key] = now + duration;
-    return exists;
+  } else if (exists && !expired) {
+    this.cache[key] = value;
+    this.expiration[key] = now + duration;
+    return true;
   }
 
   return false;
@@ -42,15 +47,13 @@ TimeLimitedCache.prototype.set = function (key, value, duration) {
  */
 TimeLimitedCache.prototype.get = function (key) {
   let now = Date.now();
-  let exists = this.cache[key];
-  let expired = this.expiration[key] < now;
+  let exists = this.expiration[key] ? true : false;
+  let expired = this.expiration[key] && this.expiration[key] < now;
 
-  if (exists && !expired) return this.cache[key];
+  if (expired || !exists) result = -1;
+  else if (exists && !expired) result = this.cache[key];
 
-  delete this.cache[key];
-  delete this.expiration[key];
-
-  return -1;
+  return result;
 };
 
 /**
@@ -60,8 +63,9 @@ TimeLimitedCache.prototype.count = function () {
   let counter = 0;
   let now = Date.now();
 
-  for (let key in this.cache) {
-    if (this.cache[key] && this.expiration[key] > now) counter++;
+  for (let key in this.expiration) {
+    let expired = this.expiration[key] && this.expiration[key] < now;
+    if (!expired) counter++;
   }
 
   return counter;

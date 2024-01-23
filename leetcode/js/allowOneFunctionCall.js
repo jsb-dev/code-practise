@@ -9,12 +9,13 @@
  * @return {Function}
  */
 var once = function (fn) {
+  let result = false;
+
   return function (...args) {
-    if (fn) {
-      const result = fn(...args);
-      fn = null;
-      return result;
-    }
+    if (result !== false) return undefined;
+
+    result = fn(...args);
+    return result;
   };
 };
 

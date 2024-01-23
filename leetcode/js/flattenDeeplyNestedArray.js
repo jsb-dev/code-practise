@@ -18,20 +18,19 @@
 var flat = function (arr, n) {
   if (n === 0) return arr;
 
-  let stack = arr.map((item) => [item, 0]); // Pair each item with its depth
+  let stack = arr.map((item) => [item, 0]);
   let result = [];
 
   while (stack.length > 0) {
     let [current, currentDepth] = stack.pop();
+    let isArray = Array.isArray(current);
 
-    if (Array.isArray(current) && currentDepth < n) {
-      // Push each item of the array to the stack with incremented depth
+    if (isArray && currentDepth < n) {
       stack.push(...current.map((item) => [item, currentDepth + 1]));
     } else {
-      // Add non-array items directly to result
       result.push(current);
     }
   }
 
-  return result.reverse(); // reverse to maintain the original order
+  return result.reverse();
 };

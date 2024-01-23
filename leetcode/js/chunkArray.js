@@ -8,15 +8,16 @@
  * @return {Array}
  */
 var chunk = function (arr, size) {
-  let chunkedArr = [];
+  let result = [];
   let chunk = [];
-  arr.forEach((num, i) => {
-    chunk.push(num);
+
+  arr.forEach((el, i) => {
+    chunk.push(el);
     if (chunk.length === size || i === arr.length - 1) {
-      chunkedArr.push(chunk);
+      result.push(chunk);
       chunk = [];
     }
   });
 
-  return chunkedArr;
+  return result;
 };

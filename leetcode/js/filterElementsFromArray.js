@@ -11,11 +11,10 @@
  * @return {number[]}
  */
 var filter = function (arr, fn) {
-  var result = [];
+  let result = [];
   arr.forEach((el, i) => {
-    if (fn(el, i)) {
-      result.push(el);
-    }
+    fn(el, i) ? result.push(el) : null;
   });
-  return filteredArr;
+
+  return result;
 };

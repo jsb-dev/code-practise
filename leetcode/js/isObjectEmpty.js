@@ -10,14 +10,19 @@ You may assume the object or array is the output of JSON.parse.
  * @return {boolean}
  */
 var isEmpty = function (obj) {
-  if (Array.isArray(obj)) return obj.length === 0;
-  else if (typeof obj === 'object') {
-    for (let key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        return false;
-      }
-    }
+  const isArray = Array.isArray(obj);
+  const isObject = typeof obj === 'object';
 
-    return true;
+  if (isArray) {
+    let isEmpty = obj.length === 0;
+    if (isEmpty) return true;
+    else return false;
+  } else if (isObject) {
+    for (let key in obj) {
+      let keyExists = obj.hasOwnProperty(key);
+      if (keyExists) return false;
+    }
   }
+
+  return true;
 };
